@@ -134,10 +134,13 @@ public class Rational implements Comparable{
     public boolean equals( Rational r ){
     	
     	if ( compareTo(r) == 0){
+    	    
     	    return true;
+    	    
     	    }
+    	    
     	return false;
-    	}
+    }
 
      public int getNumerator(){
 	return n;
