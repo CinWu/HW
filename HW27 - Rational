@@ -25,8 +25,8 @@ public class Rational{
 	    d = 1;
 	
 	    String number = n + "/" + d;
-	    System.out.println("Sadly, I cannot let you divide by zero, as it would destroy the universe.");
-
+	    System.out.println("Sadly, I cannot let you divide by zero, as it would destroy the universe. I will set the denominator to zero instead.");
+	    d = 1;
 	}
 
 	else{
@@ -58,14 +58,23 @@ public class Rational{
 	
     }
     
-    public void divide( Rational r ){
-
-        n = n*r.getDenominator();
-	d = d*r.getNumerator();
-	    
-	number = n + "/" + d;
-	
+    public void divide( Rational r ) {
+    
+        if ( r._numerator != 0 ) {
+        
+         _numerator = _numerator * r._denominator;
+         _denominator = _denominator * r._numerator;
+         
+        }
+        
+        else {
+        
+         System.out.println( "Div by 0 error. Values unchanged." );
+       
+        }
+        
     }
+
 
     public void add( Rational r ){
 
@@ -111,25 +120,15 @@ public class Rational{
 	number = n + "/" + d;
     }
 
-    public int compareTo( Rational r ){
-	
-	if ( ( n == r.getNumerator() ) && ( d == r.getDenominator() ) ){
-	    
-	    return 0;
+    public int compareTo( Rational other ) {
 
-	}
+        int thisNumerator, otherNumerator;
 
-	else if ( ( n* 1.0 )/d > ( r.getNumerator()*1.0 )/d ){
-	    
-	    return 1;
+        thisNumerator = n* other.d;
+        otherNumerator = d * other.n;
 
-	}
+        return thisNumerator - otherNumerator;
 
-	else{
-	    
-	    return -1;
-
-	}
     }
 
      public int getNumerator(){
