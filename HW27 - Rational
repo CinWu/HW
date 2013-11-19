@@ -3,7 +3,7 @@
 //HW27
 //2013-11-18
 
-public class Rational{
+public class Rational implements Comparable{
     
     private String number = "";
     private int n;
@@ -120,16 +120,24 @@ public class Rational{
 	number = n + "/" + d;
     }
 
-    public int compareTo( Rational other ) {
+    public int compareTo( Rational other ){
 
         int thisNumerator, otherNumerator;
 
-        thisNumerator = n* other.d;
+        thisNumerator = n * other.d;
         otherNumerator = d * other.n;
 
         return thisNumerator - otherNumerator;
 
     }
+    
+    public boolean equals( Rational r ){
+    	
+    	if ( compareTo(r) == 0){
+    	    return true;
+    	    }
+    	return false;
+    	}
 
      public int getNumerator(){
 	return n;
