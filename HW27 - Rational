@@ -1,0 +1,161 @@
+//Cindy Wu
+//pd9
+//HW27
+//2013-11-18
+
+public class Rational{
+    
+    private String number = "";
+    private int n;
+    private int d;
+
+    public Rational(){	
+	
+	n = 0;
+	d = 1;
+	
+	String number = n + "/" + d;
+
+    }
+    public Rational ( int num, int den ){
+	
+	if ( den == 0 ){
+
+	    n = 0;
+	    d = 1;
+	
+	    String number = n + "/" + d;
+	    System.out.println("Sadly, I cannot let you divide by zero, as it would destroy the universe.");
+
+	}
+
+	else{
+
+	    n = num;
+	    d = den;
+
+	    String number = n + "/" + d;
+	}
+    }
+
+    public String toString(){
+	
+	return number;
+    }
+
+    public double floatValue(){
+	
+	double f = n/d;
+	return f;
+    }
+    
+    public void multiply( Rational r ){
+
+	n = n*r.getNumerator();
+	d = d*r.getDenominator();
+
+	number = n + "/" + d;
+	
+    }
+    
+    public void divide( Rational r ){
+
+        n = n*r.getDenominator();
+	d = d*r.getNumerator();
+	    
+	number = n + "/" + d;
+	
+    }
+
+    public void add( Rational r ){
+
+	n = n*r.getDenominator() + d*r.getNumerator();
+	d = d*r.getDenominator() + d*r.getDenominator();
+
+	number = n + "/" + d;
+	
+    }
+
+    public void subtract( Rational r ){
+
+	n = n*r.getDenominator() - d*r.getNumerator();
+	d = d*r.getDenominator();
+	    
+        number = n + "/" + d;
+   
+    }
+
+    private static int ans = 0;
+
+    public static int gcd( int a, int b){
+
+	if ( a%b == 0 ){
+
+	    ans = b;
+
+	}
+	else{
+
+	    gcd( b,a%b );
+
+	}
+	return ans;
+    }
+
+    public void reduce(){
+
+	int tmpn = n;
+
+	n = n/gcd( n,d );
+	d = d/gcd( tmpn,d );
+	number = n + "/" + d;
+    }
+
+    public int compareTo( Rational r ){
+	
+	if ( ( n == r.getNumerator() ) && ( d == r.getDenominator() ) ){
+	    
+	    return 0;
+
+	}
+
+	else if ( ( n* 1.0 )/d > ( r.getNumerator()*1.0 )/d ){
+	    
+	    return 1;
+
+	}
+
+	else{
+	    
+	    return -1;
+
+	}
+    }
+
+     public int getNumerator(){
+	return n;
+    }
+    public int getDenominator(){
+	return d;
+    }
+
+    public static void main ( String args[] ){
+	
+	Rational ditto = new Rational(1,1);
+	Rational eevee = new Rational(2,3);
+	Rational shaymin = new Rational(5,10);
+
+	shaymin.reduce();
+	System.out.println("reduce 5/10: " + shaymin);
+	eevee.add(ditto);
+	System.out.println("add 2/3 and 1/1: " + eevee);
+	eevee.multiply(shaymin);
+	System.out.println("multiply 5/6 and 1/2: " + eevee);
+	eevee.divide(shaymin);
+	System.out.println("divide 5/12 and 1/2: " + eevee);
+	eevee.subtract(shaymin);
+	System.out.println("subtract 10/12 and 1/2: " + eevee);
+	
+
+    }
+}
